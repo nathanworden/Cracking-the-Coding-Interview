@@ -21,27 +21,32 @@ require 'pry'
   # (2, 0), (2, 1), (2, 2)           (2, 2), (1, 2), (0, 2)
 
 # Code
-a
 
-def rotate_matrix(arrays)
-  output = []
-  arrays.length.times do |num|
-    output << []
-  end
 
-  arrays.each_with_index do |arr, row_idx|
-    arr.each_with_index do |num, column_idx|
-      binding.pry
-      output[column_idx][arrays.length - 1 - row_idx] = num
-    end
-  end
-  output
-end
+# def rotate_matrix(arrays)
+#   output = []
+#   arrays.length.times do |num|
+#     output << []
+#   end
 
-p rotate_matrix(
-[[1, 2, 3],
- [4, 5, 6],
- [7, 8, 9]]) 
+#   arrays.each_with_index do |arr, row_idx|
+#     arr.each_with_index do |num, column_idx|
+#       output[column_idx][arrays.length - 1 - row_idx] = num
+#     end
+#   end
+#   output
+# end
+
+# p rotate_matrix(
+# [[1, 2, 3],
+#  [4, 5, 6],
+#  [7, 8, 9]]) 
+
+# p rotate_matrix(
+#   [[1,   2,  3,  4],      #  13,  9,  5,  1
+#    [5,   6,  7,  8],      #  14, 10,  6,  2
+#    [9,  10, 11, 12],      #  15, 11,  7,  3
+#    [13, 14, 15, 16]])     #  16, 12,  8,  4
 
 
 # Using transpose: 
@@ -53,3 +58,10 @@ p rotate_matrix(
 #   end
 #   array_flipped
 # end
+
+
+
+p rotate_matrix(
+  [[1, 2, 3],
+   [4, 5, 6],
+   [7, 8, 9]]) 
