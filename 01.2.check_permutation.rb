@@ -27,22 +27,37 @@
       # If you make it throgh all the letters in the first string without returning false, return true
 
 
+
+# def check_permutation(str1, str2)
+#   return false if str1.length != str2.length
+
+#   str1.each_char do |char|
+#     match_index = str2.index(char)
+#     return false if match_index == nil
+#     str2.slice!(match_index)
+#   end
+
+#   return true
+# end
+
+
+# p check_permutation('nathan', 'thanna') == true
+# p check_permutation('nathan', 'daniel') == false
+# p check_permutation('dog', 'dog') == true
+# p check_permutation('god    ', 'dog') == false
+# p check_permutation('God', 'dog') == false
+
+
+# Another Solution: Sort the Strings
+
 def check_permutation(str1, str2)
-  return false if str1.length != str2.length
-  return false if str1 == str2
-
-  str1.each_char do |char|
-    match_index = str2.index(char)
-    return false if match_index == nil
-    str2.slice!(match_index)
-  end
-
-  return true
+  # p str1.split("")
+  # p str2.split("").sort
+  str1.split("").sort.join("") == str2.split("").sort.join("")
 end
-
 
 p check_permutation('nathan', 'thanna') == true
 p check_permutation('nathan', 'daniel') == false
-p check_permutation('dog', 'dog') == false
+p check_permutation('dog', 'dog') == true
 p check_permutation('god    ', 'dog') == false
 p check_permutation('God', 'dog') == false
