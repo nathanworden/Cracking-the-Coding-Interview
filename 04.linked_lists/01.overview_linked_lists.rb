@@ -42,8 +42,18 @@ class LinkedList
   def insert_at_index(index, value)
     new_node = Node.new(value)
     if index == 0
-      
+      new_node.next_node = first_node
+      self.first_node = new_node
+      return
     end
+    current_node = first_node
+    current_index = 0
+    while current_index < (index - 1) do
+      current_node = current_node.next_node
+      current_index += 1
+    end
+    new_node.next_node = current_node.next_node
+    current_node.next_node = new_node
   end
 
   def delete_at_index(index)
@@ -59,6 +69,14 @@ class LinkedList
     end
     node_after_deleted_node = current_node.next_node.next_node
     current_node.next_node = node_after_deleted_node
+  end
+
+  def print
+    current_node = first_node
+    while current_node.data
+      p current_node.data
+      current_node = current_node.next_node
+    end
   end
 end
 
@@ -77,4 +95,8 @@ node3.next_node = node4
 list = LinkedList.new(node1)
 
 # p list.read(3)
-p list.index_of("time")
+# p list.index_of("time")
+
+list.insert_at_index(4, "there")
+
+list.print
