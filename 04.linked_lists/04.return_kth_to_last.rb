@@ -3,7 +3,7 @@ class Node
     @data = data
   end
 
-  attr_accessor :next_node
+  attr_accessor :next_node, :previous
   attr_reader :data
 end
 
@@ -71,6 +71,35 @@ class LinkedList
     current_node.next_node = node_after_deleted_node
   end
 
+  def remove_duplicates
+    hsh = {}
+    previous_node = nil
+    current_node = first_node
+    while current_node
+      if hsh[current_node.data]
+        previous_node.next_node = current_node.next_node
+        current_node = previous_node
+      else
+        hsh[current_node.data] = true
+      end
+      previous_node = current_node
+      current_node = current_node.next_node
+    end
+    self.print
+  end
+
+  def kth_to_last(num)
+    hsh = {}
+    current_node = first_node
+    current_idx = 0
+    while current_node
+      hsh[current_idx] = current_node.data
+      current_idx += 1
+      current_node = current_node.next_node
+    end
+    hsh[hsh.length - num]
+  end
+
   def print
     current_node = first_node
     loop do
@@ -80,8 +109,6 @@ class LinkedList
     end
   end
 end
-
-
 
 node1 = Node.new("once")
 node2 = Node.new("upon")
@@ -93,11 +120,34 @@ node2.next_node = node3
 node4 = Node.new("time")
 node3.next_node = node4
 
+node5 = Node.new("there")
+node4.next_node = node5
+
+node6 = Node.new("was")
+node5.next_node = node6
+
+node7 = Node.new("an")
+node6.next_node = node7
+
+node8 = Node.new("amazing")
+node7.next_node = node8
+
+node9 = Node.new("bear")
+node8.next_node = node9
+
 list = LinkedList.new(node1)
 
-# p list.read(3)
-# p list.index_of("time")
 
-list.insert_at_index(4, "there")
+# list.print
 
-list.print
+# Problem
+# Return Kth to last: Implement an algorithm to find the kth to last element of a singly linked list.
+
+# Algorithm
+# Store the data in a hash table. Then return the one at length - key
+
+
+
+p list.kth_to_last(5) #=> "there"
+p list.kth_to_last(8) #=> "upon"
+p list.kth_to_last(1) #=> "bear"

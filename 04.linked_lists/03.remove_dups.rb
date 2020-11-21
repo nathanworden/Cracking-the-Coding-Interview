@@ -3,7 +3,7 @@ class Node
     @data = data
   end
 
-  attr_accessor :next_node
+  attr_accessor :next_node, :previous
   attr_reader :data
 end
 
@@ -71,6 +71,23 @@ class LinkedList
     current_node.next_node = node_after_deleted_node
   end
 
+  def remove_duplicates
+    hsh = {}
+    previous_node = nil
+    current_node = first_node
+    while current_node
+      if hsh[current_node.data]
+        previous_node.next_node = current_node.next_node
+        current_node = previous_node
+      else
+        hsh[current_node.data] = true
+      end
+      previous_node = current_node
+      current_node = current_node.next_node
+    end
+    self.print
+  end
+
   def print
     current_node = first_node
     loop do
@@ -80,8 +97,6 @@ class LinkedList
     end
   end
 end
-
-
 
 node1 = Node.new("once")
 node2 = Node.new("upon")
@@ -93,11 +108,36 @@ node2.next_node = node3
 node4 = Node.new("time")
 node3.next_node = node4
 
+node5 = Node.new("once")
+node4.next_node = node5
+
+node6 = Node.new("a")
+node5.next_node = node6
+
+node7 = Node.new("there")
+node6.next_node = node7
+
+node8 = Node.new("was")
+node7.next_node = node8
+
+node9 = Node.new("an")
+node8.next_node = node9
+
+node10 = Node.new("amazing")
+node9.next_node = node10
+
+node11 = Node.new("bear")
+node10.next_node = node11
+
 list = LinkedList.new(node1)
 
-# p list.read(3)
-# p list.index_of("time")
+# list.print
 
-list.insert_at_index(4, "there")
+puts
 
-list.print
+list.remove_duplicates
+
+# Problem: Write code to remove duplicates from an unsorted linked list
+
+#Iterate through the linked list, storing each value in a hash table. If the current value of a node is already in the hash table, delete it.
+
