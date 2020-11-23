@@ -71,6 +71,24 @@ class LinkedList
     current_node.next_node = node_after_deleted_node
   end
 
+  def last_node
+    current_node = first_node
+    while current_node.next_node
+      current_node = current_node.next_node
+    end
+    current_node
+  end
+
+  def palindrome?
+    arr = []
+    current_node = first_node
+    while current_node
+      arr << current_node.data
+      current_node = current_node.next_node
+    end
+    arr == arr.reverse
+  end
+
   def print
     current_node = first_node
     loop do
@@ -85,14 +103,19 @@ end
 
 
 
-node1 = Node.new("once")
-node2 = Node.new("upon")
+node1 = Node.new("a")
+node2 = Node.new("b")
+node3 = Node.new("c")
+node4 = Node.new("b")
+node5 = Node.new("a")
+node6 = Node.new("dohg")
+
+
 node1.next_node = node2
-
-node3 = Node.new("a")
 node2.next_node = node3
-
-node4 = Node.new("time")
 node3.next_node = node4
+node4.next_node = node5
+node5.next_node = node6
 
 list = LinkedList.new(node1)
+p list.palindrome?
