@@ -34,9 +34,8 @@ def sort_stack(stack1)
       next
     end
 
-    while buffer < stack2.read
+    while stack2.read.nil? || buffer < stack2.read
       if stack2.empty?
-        stack2.push(buffer)
         break
       end
       stack1.push(stack2.pop)
